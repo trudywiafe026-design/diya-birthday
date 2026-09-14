@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Happy Birthday Diya 💜</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Georgia, "Times New Roman", serif;
+    background: linear-gradient(135deg, #eee0ff, #d8b4fe, #f3e8ff);
+    color: #4b286d;
+    text-align: center;
+    overflow-x: hidden;
+}
+
+.hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 20px;
+    position: relative;
+}
+
+.glow {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: rgba(255,255,255,0.35);
+    border-radius: 50%;
+    filter: blur(50px);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.small {
+    font-size: 16px;
+    letter-spacing: 3px;
+    margin-bottom: 15px;
+}
+
+h1 {
+    font-size: clamp(50px, 13vw, 90px);
+    color: #7c3aed;
+    text-shadow: 0 5px 20px rgba(124,58,237,0.25);
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 22px;
+    color: #63358f;
+    margin-bottom: 15px;
+}
+
+.date {
+    font-size: 18px;
+    margin-bottom: 25px;
+}
+
+/* MUSIC PLAYER */
+.music-box {
+    margin: 25px auto;
+    padding: 20px;
+    max-width: 350px;
+    background: rgba(255,255,255,0.65);
+    border-radius: 25px;
+    box-shadow: 0 10px 30px rgba(76,29,149,0.18);
+    backdrop-filter: blur(10px);
+}
+
+.music-title {
+    font-size: 18px;
+    color: #6d28d9;
+    margin-bottom: 12px;
+}
+
+.music-box audio {
+    width: 100%;
+}
+
+button {
+    border: none;
+    background: linear-gradient(135deg, #8b5cf6, #a855f7);
+    color: white;
+    padding: 15px 28px;
+    border-radius: 40px;
+    font-size: 17px;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(124,58,237,0.3);
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: translateY(-3px) scale(1.03);
+}
+
+#secretMessage {
+    display: none;
+    margin-top: 25px;
+    font-size: 19px;
+    line-height: 1.8;
+}
+
+.show {
+    display: block !important;
+    animation: fadeIn 1s ease;
+}
+
+section {
+    padding: 70px 20px;
+}
+
+.section-title {
+    font-size: 38px;
+    color: #6d28d9;
+    margin-bottom: 15px;
+}
+
+.section-text {
+    max-width: 700px;
+    margin: auto;
+    line-height: 1.8;
+    font-size: 18px;
+}
+
+/* LETTER */
+.letter-container {
+    max-width: 750px;
+    margin: 35px auto;
+    background: rgba(255,255,255,0.65);
+    padding: 35px;
+    border-radius: 25px;
+    box-shadow: 0 15px 45px rgba(76,29,149,0.15);
+    backdrop-filter: blur(10px);
+    text-align: left;
+    line-height: 1.9;
+    font-size: 18px;
+}
+
+.letter-container p {
+    margin-bottom: 18px;
+}
+
+/* VIDEOS */
+.video-grid {
+    max-width: 1000px;
+    margin: 40px auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+.video-card {
+    background: rgba(255,255,255,0.65);
+    padding: 12px;
+    border-radius: 22px;
+    box-shadow: 0 12px 35px rgba(76,29,149,0.18);
+}
+
+.video-card video {
+    width: 100%;
+    border-radius: 16px;
+    display: block;
+}
+
+.video-caption {
+    padding: 14px 5px 7px;
+    font-size: 16px;
+    color: #6d28d9;
+}
+
+/* CARDS */
+.cards {
+    max-width: 900px;
+    margin: 40px auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: rgba(255,255,255,0.6);
+    padding: 30px 20px;
+    border-radius: 25px;
+    box-shadow: 0 10px 30px rgba(76,29,149,0.12);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-7px);
+}
+
+.card .emoji {
+    font-size: 40px;
+    margin-bottom: 12px;
+}
+
+.card h3 {
+    margin-bottom: 10px;
+    color: #7c3aed;
+}
+
+/* FINAL */
+.final {
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.final h2 {
+    font-size: clamp(38px, 9vw, 70px);
+    color: #7c3aed;
+    margin-bottom: 20px;
+}
+
+.final p {
+    max-width: 650px;
+    font-size: 20px;
+    line-height: 1.8;
+}
+
+footer {
+    padding: 30px 20px;
+    background: rgba(109,40,217,0.1);
+    color: #63358f;
+}
+
+/* FLOATING HEARTS */
+.heart {
+    position: fixed;
+    bottom: -30px;
+    font-size: 22px;
+    animation: floatUp 7s linear infinite;
+    opacity: 0.7;
+    pointer-events: none;
+    z-index: 10;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+
+    15% {
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HERO -->
+<div class="hero">
+
+    <div class="glow"></div>
+
+    <div class="hero-content">
+
+        <div class="small">
+            A LITTLE BIRTHDAY SURPRISE FOR
+        </div>
+
+        <h1>Diya 💜</h1>
+
+        <div class="subtitle">
+            Safian Mardiya Tahir
+        </div>
+
+        <div class="date">
+            ✨ 13th November ✨
+        </div>
+
+
+        <!-- SNAP MUSIC -->
+        <div class="music-box">
+
+            <div class="music-title">
+                🎶 A little song for you 💜
+            </div>
+
+            <audio id="snapSong" controls preload="metadata">
+                <source src="1000181851.mp4" type="audio/mp4">
+                Your browser does not support audio.
+            </audio>
+
+            <p style="margin-top:10px;font-size:14px;">
+                Press play and enjoy the surprise 🎀
+            </p>
+
+        </div>
+
+
+        <button onclick="showSecret()">
+            Open Your Surprise 💌
+        </button>
+
+        <div id="secretMessage">
+            Happy Birthday to one of the most beautiful souls in my life. 🥹💜
+            <br>
+            You deserve all the happiness in the world.
+        </div>
+
+    </div>
+</div>
+
+
+<!-- ABOUT HER -->
+<section>
+
+    <div class="section-title">
+        For My Diya 💜
+    </div>
+
+    <p class="section-text">
+        Today isn't just another day.
+        It's the day someone incredibly special was born.
+        Someone whose presence makes ordinary moments feel special,
+        whose laughter can change the mood of an entire room,
+        and whose friendship I will always treasure.
+    </p>
+
+</section>
+
+
+<!-- LETTER -->
+<section>
+
+    <div class="section-title">
+        A Letter For You 💌
+    </div>
+
+    <div class="letter-container">
+
+        <p>Dear Diya,</p>
+
+        <p>
+            Happy Birthday, my girl. 💜🎂
+        </p>
+
+        <p>
+            I honestly don't know where to begin because there are so many
+            things I could say about you. But today, I just want you to know
+            how grateful I am that you are in my life.
+        </p>
+
+        <p>
+            Through all the random conversations, the laughter, the little
+            arguments, the unforgettable moments and even the completely
+            unserious moments, you have become someone incredibly special
+            to me.
+        </p>
+
+        <p>
+            I hope this new chapter of your life brings you everything your
+            heart has been quietly wishing for. I hope you experience
+            genuine happiness, beautiful opportunities, unforgettable
+            memories and people who love and appreciate you properly.
+        </p>
+
+        <p>
+            Never forget how amazing you are. You are worthy of good things.
+            You are worthy of happiness. You are worthy of being celebrated.
+        </p>
+
+        <p>
+            And whenever life gets difficult, I hope you remember that you
+            have already made it through so many things before. Keep going.
+            Keep believing in yourself. Keep being the beautiful person you
+            are.
+        </p>
+
+        <p>
+            I hope we create even more crazy memories together, laugh until
+            our stomachs hurt, take embarrassing pictures, have random
+            conversations at ridiculous hours and look back one day and
+            realize just how beautiful this chapter of our lives was.
+        </p>
+
+        <p>
+            Thank you for being you.
+        </p>
+
+        <p>
+            Happy Birthday, Safian Mardiya Tahir. 💜
+        </p>
+
+        <p>
+            With lots of love,
+            <br>
+            <strong>Trudy 🎀</strong>
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- VIDEOS -->
+<section>
+
+    <div class="section-title">
+        Our Little Memories 🎥💜
+    </div>
+
+    <p class="section-text">
+        Some moments deserve to be kept forever. 🥹
+    </p>
+
+
+    <div class="video-grid">
+
+        <div class="video-card">
+
+            <video controls playsinline preload="metadata">
+                <source src="VID-20260618-WA0033.mp4" type="video/mp4">
+            </video>
+
+            <div class="video-caption">
+                💜 A memory worth keeping
+            </div>
+
+        </div>
+
+
+        <div class="video-card">
+
+            <video controls playsinline preload="metadata">
+                <source src="Snapchat-1076661269.mp4" type="video/mp4">
+            </video>
+
+            <div class="video-caption">
+                🎀 Just us being us
+            </div>
+
+        </div>
+
+
+        <div class="video-card">
+
+            <video controls playsinline preload="metadata">
+                <source src="Snapchat-1757936432.mp4" type="video/mp4">
+            </video>
+
+            <div class="video-caption">
+                🥹 Another memory for the books
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- WISHES -->
+<section>
+
+    <div class="section-title">
+        Things I Wish For You ✨
+    </div>
+
+    <div class="cards">
+
+        <div class="card">
+            <div class="emoji">💜</div>
+            <h3>Happiness</h3>
+            <p>
+                May you always have reasons to smile,
+                even on the difficult days.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="emoji">✨</div>
+            <h3>Success</h3>
+            <p>
+                May every dream you're working toward
+                slowly become your reality.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="emoji">🦋</div>
+            <h3>Growth</h3>
+            <p>
+                May this new chapter help you become
+                an even stronger and happier version of yourself.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="emoji">🎀</div>
+            <h3>Beautiful Memories</h3>
+            <p>
+                May you have countless moments that
+                you'll remember forever.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FINAL -->
+<section class="final">
+
+    <h2>Happy Birthday, Diya! 💜</h2>
+
+    <p>
+        May 13th November always remind you that your existence
+        is something worth celebrating. 🎂
+        <br><br>
+
+        Here's to another year of laughter, growth, adventures,
+        beautiful memories and becoming everything you dream of becoming.
+        <br><br>
+
+        <strong>I love you, girl. 💜🎀</strong>
+    </p>
+
+</section>
+
+
+<footer>
+    Made with love for Diya 💜
+    <br>
+    © 2026
+</footer>
+
+
+<script>
+
+function showSecret() {
+
+    const message = document.getElementById("secretMessage");
+
+    message.classList.toggle("show");
+
+    if (message.classList.contains("show")) {
+        message.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+    }
+}
+
+
+/* FLOATING HEARTS */
+function createHeart() {
+
+    const heart = document.createElement("div");
+
+    heart.className = "heart";
+
+    const hearts = [
+        "💜",
+        "💗",
+        "💕",
+        "✨",
+        "🦋",
+        "🎀"
+    ];
+
+    heart.innerHTML =
+        hearts[Math.floor(Math.random() * hearts.length)];
+
+    heart.style.left =
+        Math.random() * 100 + "vw";
+
+    heart.style.animationDuration =
+        (5 + Math.random() * 5) + "s";
+
+    heart.style.fontSize =
+        (15 + Math.random() * 18) + "px";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 10000);
+}
+
+setInterval(createHeart, 700);
+
+</script>
+
+</body>
+              </html>
